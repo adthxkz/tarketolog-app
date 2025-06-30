@@ -2,7 +2,7 @@
 const webhookUrl = 'https://hook.eu2.make.com/ajdfn066bhobcgx81g2tssl7rwkq9duw';
 
 // Вставьте вашу ссылку на ОПУБЛИКОВАННЫЙ CSV-файл таблицы
-const sheetUrl = 'ВАША_ССЫЛКА_НА_CSV_ИЗ_GOOGLE_SHEETS';
+const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRmT61yV7Eeiy6avn7CXmgVJ1LWUQT5UlW1MEzzRv2mnkBALbU04y_GigrTjo-b0iEQ1g7QSjzPob01/pub?gid=0&single=true&output=csv';
 
 document.addEventListener('DOMContentLoaded', () => {
     Telegram.WebApp.ready();
