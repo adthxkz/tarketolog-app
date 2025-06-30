@@ -1,4 +1,4 @@
-// Вставляем ВАШУ ссылку на вебхук, которую вы только что получили
+// Вставляем ВАШУ ссылку на вебхук
 const webhookUrl = 'https://hook.eu2.make.com/ajdfn066bhobcgx81g2tssl7rwkq9duw';
 
 // Ждем, пока вся HTML-страница полностью загрузится
@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Загружаем данные напрямую из нашего сценария в Make
     fetch(webhookUrl)
-        .then(response => response.json()) // Теперь мы ожидаем данные в формате JSON
+        .then(response => response.json()) // Ожидаем данные в формате JSON
         .then(data => {
-            // 'data' - это уже готовый объект с данными и анализом от Make
+            // 'data' - это готовый объект с данными и анализом от Make
             updateDashboard(data);
             renderChart(data.history);
         })
@@ -29,18 +29,19 @@ function updateDashboard(data) {
         document.getElementById('ctr-value').innerText = parseFloat(latestEntry.ctr).toFixed(2);
         document.getElementById('cpc-value').innerText = parseFloat(latestEntry.cpc).toFixed(2);
         
-        // Вставляем реальный анализ от AI, который пришел от Make
-        document.getElementById('ai-recommendation').innerText = data.ai_analysis;
+        document.getElementById('ai-recommendation').innerText = 'Подробный анализ отправлен вам в чат.';
     }
 }
 
 // Функция для отрисовки графика
 function renderChart(historyData) {
-    // historyData - это массив с данными за последние дни, который пришел от Make
     if (!historyData || historyData.length === 0) return;
 
-    const labels = historyData.map(row => new Date(row['Дата отчета']).toLocaleDateString('ru-RU'));
-    const spendData = historyData.map(row => parseFloat(row['Потрачено']));
+    // ----- ВОТ ЗДЕСЬ БЫЛА ОШИБКА -----
+    const chartData = historyData.slice(-7);
+
+    const labels = chartData.map(row => new Date(row['Дата отчета']).toLocaleDateString('ru-RU'));
+    const spendData = chartData.map(row => parseFloat(row['Потрачено']));
 
     const ctx = document.getElementById('spend-chart').getContext('2d');
     
